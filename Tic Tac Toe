@@ -1,0 +1,93 @@
+
+def tablero():
+    board = [[" "," | "," "," | "," "],
+            ["--|---|--"],
+            [" "," | "," "," | "," "],
+            ["--|---|--"],
+            [" "," | "," "," | "," "]
+    ]
+
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            print(board[row][col], end = "")
+        print()
+
+    return(board)
+
+def printGrid(x):
+    for row in range(len(x)):
+        for col in range(len(x[row])):
+            print(x[row][col], end = "")
+        print()
+
+
+def newTurn(turn):
+    player = turn
+    if (player%2 == 0):
+        return 1
+    else:
+        return 0
+
+
+def question():
+    x,y = map(int, input("What position do you want to play").split())
+    return (x,y)
+
+def main():
+    newBoard = tablero()
+    print("Welcome to Tic-Tac-Toe")
+    print("RULES")
+    print("1. Rows from 1 to 3\n2. Columns from 1 to 3\n3. Have fun!")    
+    print()
+    counter = 1
+
+    for tag in range(5):
+        turn = newTurn(counter)
+
+        if(turn == 1):
+            x,y = question()
+
+            if(x == 1):
+                x = 0
+            if(y == 1):
+                y = 0
+            if(x == 3):
+                x = 4
+            if(y == 3):
+                y = 4
+
+            newBoard[x][y] = "O"
+            printGrid(newBoard)
+
+        elif(turn == 0):
+            x,y = question()
+
+            if(x == 1):
+                x = 0
+            if(y == 1):
+                y = 0
+            if(x == 3):
+                x = 4
+            if(y == 3):
+                y = 4
+            newBoard[x][y] = "X"
+            printGrid(newBoard)
+
+        counter += 1
+    count = 0
+    
+    #Checks Horizontal Wins
+    for col in range(len(newBoard)):
+        for row in range(len(newBoard[col])):
+            if("X" in newBoard[col][row]):
+                count += 1
+                if(count == 3):
+                    print("You win")  
+
+        
+
+    #print()
+    
+main()
+
+    
